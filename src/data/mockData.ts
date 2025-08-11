@@ -4,9 +4,9 @@ export const categories: Category[] = [
   { id: '1', name: 'Électronique', icon: 'Smartphone' },
   { id: '2', name: 'Mode', icon: 'Shirt' },
   { id: '3', name: 'Maison', icon: 'Home' },
-  { id: '4', name: 'Beauté', icon: 'Heart' },
+  { id: '4', name: 'Véhicules', icon: 'Car' },
   { id: '5', name: 'Sports', icon: 'Dumbbell' },
-  { id: '6', name: 'Véhicules', icon: 'Car' },
+  { id: '6', name: 'Jeux et Console', icon: 'Games and Console' },
 ];
 
 export const mockProducts: Product[] = [
