@@ -1,12 +1,15 @@
 import React from 'react';
 import { Product } from '../types/Product';
-import { MapPin, MessageCircle, Star } from 'lucide-react';
+import { MapPin, MessageCircle, Star, Eye } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // pour navigation
 
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const navigate = useNavigate();
+
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('fr-FR', {
       style: 'currency',
@@ -18,6 +21,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const message = `Bonjour, je suis intéressé(e) par votre produit : ${product.title} - ${formatPrice(product.price)}`;
     const whatsappUrl = `https://wa.me/${product.sellerPhone.replace(/\s+/g, '')}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  const handleDetailsClick = () => {
+    navigate(`/product/${product.id}`); // redirection vers la page détails
   };
 
   return (
@@ -82,10 +89,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <button
           onClick={handleWhatsAppClick}
           disabled={product.stock === 0}
-          className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+          className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2 mb-2"
         >
           <MessageCircle className="h-4 w-4" />
           <span>Contacter sur WhatsApp</span>
+        </button>
+
+        {/* Bouton Voir les détails */}
+        <button
+          onClick={handleDetailsClick}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors flex items-center justify-center space-x-2"
+        >
+          <Eye className="h-4 w-4" />
+          <span>Voir les détails</span>
         </button>
       </div>
     </div>
